@@ -1,0 +1,10 @@
+name = "EcoNetDynOutputs"
+uuid = "9b7c96af-00f4-4809-8f3b-e928a99f2955"
+authors = ["Alain Danet <a.h.danet@sheffield.ac.uk>"]
+version = "0.1.0"
+
+[deps]
+EcologicalNetworksDynamics = "2fd9189a-c387-4076-88b7-22b33b5a4388"
+
+[compat]
+EcologicalNetworksDynamics = "0.2.0"
