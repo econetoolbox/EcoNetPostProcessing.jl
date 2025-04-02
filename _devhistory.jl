@@ -8,7 +8,8 @@ import EcoNetDynOutputs
 EcoNetDynOutputs.greet()
 
 # Set dependencies
-Pkg.add("EcologicalNetworksDynamics")
+#Pkg.add("EcologicalNetworksDynamics")
+Pkg.develop(path = "../EcologicalNetworksDynamics.jl/")
 
 # Set public API in EcoNetDynOutputs.jl
 # https://pkgdocs.julialang.org/v1/creating-packages/#Defining-a-public-API
