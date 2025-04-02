@@ -1,5 +1,9 @@
 module EcoNetDynOutputs
 
+export greet
+
 greet() = print("Hello World!")
 
-end # module EcoNetDynOutputs
+include("./utils.jl")
+
+end
