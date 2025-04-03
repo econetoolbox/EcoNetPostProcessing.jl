@@ -1,7 +1,7 @@
 @testset "extract model from solution" begin
     foodweb = Foodweb([0 0; 0 0])
     m = default_model(foodweb)
-    sim = simulate(m, [0, 0.5], 10)
+    sim = simulate(m, [0, 0.5], 10; show_degenerated_biomass_graph_properties = false)
     @test typeof(get_parameters(sim)) == Model
 end
 
@@ -10,8 +10,7 @@ end
     # Set up
     foodweb = Foodweb([0 0; 0 0])
     m = default_model(foodweb)
-
-    sim = simulate(m, [0, 0.5], 20)
+    sim = simulate(m, [0, 0.5], 10; show_degenerated_biomass_graph_properties = false)
 
     @test round.(extract_last_timesteps(sim; last = "20.5%")) == [0.0 0.0; 1.0 1.0]
 
@@ -104,29 +103,29 @@ end
 end
 
 ############################################################
-#  Remove check extinction for now (cf Topology features)  #
+#  Consider removing last extinction for Topology features #
 #  https://github.com/econetoolbox/EcologicalNetworksDynamics.jl/issues/151
 ############################################################
 
-# Check with
 
-# @testset "check extinction" begin
+@testset "check extinction" begin
 
-    # check_last = Internals.check_last_extinction
-    # @test check_last(100; t = [100], species = ["s2"], last = 1) == true
+    check_last = EcoNetDynOutputs.check_last_extinction
+    @test check_last(100; t = [100], species = ["s2"], last = 1) == true
 
-    # @test_warn(
-        # "With `last` = 2, a table has been extracted with the species [\"s2\"], \
-         # that went extinct at timesteps = [100]. Set `last` <= 1 to get rid of them.",
-        # check_last(100, t = [100], species = ["s2"], last = 2)
-    # )
+    @test_warn(
+        "With `last` = 2, a table has been extracted with the species [\"s2\"], \
+         that went extinct at timesteps = [100]. Set `last` <= 1 to get rid of them.",
+        check_last(100, t = [100], species = ["s2"], last = 2)
+    )
 
-    # foodweb = Foodweb([0 0; 1 0]; Z = 1) # Two producers and one co
-    # m = default_model(
-        # foodweb;
-        # functional_response = BioenergeticResponse(foodweb; h = 1.0),
-    # )
-    # sol = simulates(m, [0.25, 0.25]; tmax = 500, callback = nothing, t0 = 0)
-    # @test isnothing(Internals.check_last_extinction(sol; last = 1))
+    foodweb = Foodweb([0 0; 1 0])
+    m = default_model(
+        foodweb,
+        BodyMass(; Z = 1),
+        BioenergeticResponse(; h = 1.0),
+    )
+    sol = simulate(m, [0.20, 0.5], 500; callback = nothing, t0 = 0)
+    @test isnothing(check_last(sol; last = 1))
 
-# end
+end
