@@ -37,3 +37,12 @@ Pkg.test()
 download("https://raw.githubusercontent.com/econetoolbox/EcologicalNetworksDynamics.jl/refs/heads/main/LICENSE",
          "LICENCE"
         )
+
+# Set up documentation
+using DocumenterTools
+Pkg.activate(".")
+DocumenterTools.generate("docs"; name = "EcoNetDynOutputs", format = :html)
+Pkg.activate("./docs/")
+Pkg.add("Documenter")
+Pkg.develop(path = "../EcoNetDynOutputs.jl/")
+Pkg.develop(path = "../EcologicalNetworksDynamics.jl/")

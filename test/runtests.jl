@@ -4,8 +4,8 @@ using Test
 using EcologicalNetworksDynamics, EcoNetDynOutputs
 
 # Testing utils.
-include("./test-utils.jl")
+#include("./test-utils.jl")
 
 # Testing doctests
 println("\nRun doctests.\n")
-#include("./doctests.jl")
+include("./doctests.jl")

@@ -1,0 +1,4 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+EcoNetDynOutputs = "9b7c96af-00f4-4809-8f3b-e928a99f2955"
+EcologicalNetworksDynamics = "2fd9189a-c387-4076-88b7-22b33b5a4388"
