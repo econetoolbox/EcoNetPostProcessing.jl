@@ -2,7 +2,7 @@
     foodweb = Foodweb([0 0; 0 0])
     m = default_model(foodweb)
     sim = simulate(m, [0, 0.5], 10; show_degenerated_biomass_graph_properties = false)
-    @test typeof(get_parameters(sim)) == Model
+    @test typeof(get_model(sim)) == Model
 end
 
 @testset "filtering simulation" begin
@@ -120,11 +120,7 @@ end
     )
 
     foodweb = Foodweb([0 0; 1 0])
-    m = default_model(
-        foodweb,
-        BodyMass(; Z = 1),
-        BioenergeticResponse(; h = 1.0),
-    )
+    m = default_model(foodweb, BodyMass(; Z = 1), BioenergeticResponse(; h = 1.0))
     sol = simulate(m, [0.20, 0.5], 500; callback = nothing, t0 = 0)
     @test isnothing(check_last(sol; last = 1))
 

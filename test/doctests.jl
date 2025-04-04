@@ -6,7 +6,7 @@ import EcoNetDynOutputs
 DocMeta.setdocmeta!(
     EcoNetDynOutputs,
     :DocTestSetup,
-    :(using EcoNetDynOutputs);
+    :(using EcoNetDynOutputs, EcologicalNetworksDynamics);
     recursive = true,
 )
 

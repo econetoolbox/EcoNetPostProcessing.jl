@@ -1,8 +1,6 @@
 module EcoNetDynOutputs
 
-export greet
-
-greet() = print("Hello World!")
+using EcologicalNetworksDynamics
 
 include("./utils.jl")
 

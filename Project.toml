@@ -7,4 +7,4 @@ version = "0.1.0"
 EcologicalNetworksDynamics = "2fd9189a-c387-4076-88b7-22b33b5a4388"
 
 [compat]
-EcologicalNetworksDynamics = "0.2.1"
+EcologicalNetworksDynamics = "0.3.0"

@@ -19,22 +19,25 @@ it returns a vector of the species biomass instead of a matrix.
 # Examples
 
 ```jldoctest
-julia> fw = Foodweb([0 0; 1 0]);
-       p = default_model(fw);
-       m = simulate(p, [0.5, 0.5]);
-       sim = extract_last_timesteps(m; last = 1, idxs = [2, 1]);
-       sim ==
-       extract_last_timesteps(m; last = 1, idxs = ["s2", "s1"]) ≈
-       [0.219659439; 0.188980349;;]
+julia> fw = Foodweb([0 0; 1 0])
+       m = default_model(fw)
+       B0, t_end = [1, 1], 1_000
+       sol = simulate(m, B0, t_end);
+
+julia> last = extract_last_timesteps(sol; last = 1, idxs = [2, 1]);
+       last ≈ sol.u[end][[2, 1]]
 true
 
-julia> sim1 = extract_last_timesteps(m; last = 1, idxs = [1, 2]);
-       sim2 = extract_last_timesteps(m; last = 1, idxs = ["s1", "s2"]);
-       sim1 ≈ sim2 ≈ [0.188980349; 0.219659439;;]
+julia> last = extract_last_timesteps(sol; last = 1, idxs = ["s2", "s1"]);
+       last ≈ sol.u[end][[2, 1]]
 true
 
-julia> sim = extract_last_timesteps(m; last = 1, idxs = [2]);
-       sim == extract_last_timesteps(m; last = 1, idxs = "s2")
+julia> last2 = extract_last_timesteps(sol; last = 1, idxs = [2])
+       last2 ≈ sol.u[end][[2]]
+true
+
+julia> last2 = extract_last_timesteps(sol; last = 1, idxs = "s2")
+       last2 ≈ sol.u[end][[2]]
 true
 ```
 """
@@ -62,7 +65,7 @@ Check and sanitize the species indices or names provided (`idxs`). Used in
 [`extract_last_timesteps`](@ref) and [`living_species`](@ref).
 """
 function process_idxs(solution; idxs = nothing)
-    sp = get_parameters(solution).species.names
+    sp = get_model(solution).species.names
     # Convert from EcologicalNetworksDynamics.SpeciesNames:
     sp = string.(sp)
 
@@ -168,7 +171,7 @@ end
 
 function get_extinction_timesteps(solution; idxs = nothing)
     idxs = process_idxs(solution; idxs)
-    sp = get_parameters(solution).species.names # Snippet to convert to function?
+    sp = get_model(solution).species.names # Snippet to convert to function?
     # Convert from EcologicalNetworksDynamics.SpeciesNames:
     sp = string.(sp)[idxs]
     ext_t = findfirst.(isequal(0), eachrow(solution[idxs, :]))
@@ -194,33 +197,29 @@ Returns a tuple with species having a biomass above `threshold` at the end of a 
 ```jldoctest
 julia> foodweb = Foodweb([0 0; 0 0]);
        m = default_model(foodweb);
-       sim = simulate(params, [0, 0.5], 20;
-       show_degenerated_biomass_graph_properties = false);
-       get_alive_species(sim)
-(species = ["s2"], idxs = [2])
+       sol = simulate(m, [0, 0.5], 20; show_degenerated = false);
+       get_alive_species(sol)
+(species = [:s2], idxs = [2])
 
-julia> sim = simulate(m, [0.5, 0], 20);
-       get_alive_species(sim)
-(species = ["s1"], idxs = [1])
+julia> sol = simulate(m, [0.5, 0], 20; show_degenerated = false);
+       get_alive_species(sol)
+(species = [:s1], idxs = [1])
 
-julia> sim = simulate(m, [0.5, 0.5], 20);
-       get_alive_species(sim)
-(species = ["s1", "s2"], idxs = [1, 2])
+julia> sol = simulate(m, [0.5, 0.5], 20; show_degenerated = false);
+       get_alive_species(sol)
+(species = [:s1, :s2], idxs = [1, 2])
 
-julia> sim = simulate(m, [0, 0], 20);
-       get_alive_species(sim)
-(species = String[], idxs = Int64[])
+julia> sol = simulate(m, [0, 0], 20; show_degenerated = false);
+       get_alive_species(sol)
+(species = Symbol[], idxs = Int64[])
 ```
 """
 function get_alive_species(solution; idxs = nothing, threshold = 0)
     idxs = process_idxs(solution; idxs)
-    sp = get_parameters(solution).network.species[idxs]
-    alive = get_alive_species(solution[idxs, end]; threshold = threshold)
+    sp = get_model(solution).species.names[idxs]
+    alive = get_alive_species(solution[idxs, end]; threshold)
     (species = sp[alive], idxs = idxs[alive])
 end
-
 get_extinct_species(m::AbstractVector; threshold = 0) = findall(<=(threshold), m)
 get_alive_species(m::AbstractVector; threshold = 0) = findall(>(threshold), m)
-
-get_parameters(solution) =  solution.prob.p.model
-export get_parameters
+export get_alive_species, get_extinct_species
