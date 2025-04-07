@@ -5,6 +5,10 @@ version = "0.1.0"
 
 [deps]
 EcologicalNetworksDynamics = "2fd9189a-c387-4076-88b7-22b33b5a4388"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [compat]
 EcologicalNetworksDynamics = "0.3.0"
+ForwardDiff = "0.10.38"
+LinearAlgebra = "1.11.0"
