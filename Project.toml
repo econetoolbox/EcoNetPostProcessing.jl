@@ -1,6 +1,6 @@
 name = "EcoNetDynOutputs"
 uuid = "9b7c96af-00f4-4809-8f3b-e928a99f2955"
-authors = ["Alain Danet <a.h.danet@sheffield.ac.uk>"]
+authors = ["Alain Danet <a.h.danet@sheffield.ac.uk>", "Ismaël Lajaaiti <ismael.lajaaiti@gmail.com>"]
 version = "0.1.0"
 
 [deps]
