@@ -1,11 +1,10 @@
-println("Testing...")
-
 using Test
-using EcologicalNetworksDynamics, EcoNetDynOutputs
 
-# Testing utils.
+using EcologicalNetworksDynamics
+using EcoNetDynOutputs
+using LinearAlgebra
+
+# Test files.
 #include("./test-utils.jl")
-
-# Testing doctests
-println("\nRun doctests.\n")
+include("./test-jacobian.jl")
 include("./doctests.jl")
