@@ -139,3 +139,18 @@ end
     @test j_nointerference[2, 3] == j_nointerference[3, 2] == 0
     @test j_interference[2, 3] == j_interference[3, 2] < 0
 end
+
+@testset "Jacobian: nutrients" begin
+    fw = Foodweb([0 0; 0 0])
+    nutrients = NutrientIntake(;
+        half_saturation = [0.3 0.9; 0.9 0.3],
+        turnover = 0.9,
+        supply = 10,
+        concentration = 1,
+        r = [1, 2], # Plant intrinsic growth rates.
+    )
+    m = default_model(fw, nutrients, Mortality([0.6, 1.2]))
+    sol = simulate(m, [1, 1], 10_000; N0 = [1, 1])
+    j = jacobian(m, sol.u[end])
+    @test all(real.(eigvals(j)) .< 1e-3)
+end
