@@ -154,3 +154,21 @@ end
     j = jacobian(m, sol.u[end])
     @test all(real.(eigvals(j)) .< 1e-3)
 end
+
+@testset "Resilience" begin
+    fw = Foodweb([0 0; 0 0])
+    m = default_model(fw)
+    j = jacobian(m, m.K)
+    @test resilience(j) ≈ -1
+    @test resilience([-0.1 0; 0 -1]) == -0.1
+    @test resilience([-0.2 2; 0 -1]) == -0.2
+end
+
+@testset "Resilience" begin
+    fw = Foodweb([0 0; 0 0])
+    m = default_model(fw)
+    j = jacobian(m, m.K)
+    @test reactivity(j) ≈ -1
+    @test reactivity([-0.1 0; 0 -1]) == -0.1
+    @test reactivity([-1 -4; 0 -2]) > 0 # Reactive system.
+end

@@ -1,5 +1,6 @@
 # using ForwardDiff
 using EcologicalNetworksDynamics
+using LinearAlgebra
 import ForwardDiff: jacobian
 
 """
@@ -31,3 +32,30 @@ function jacobian(m::Model, B::AbstractVector)
     Float64.(j)
 end
 export jacobian
+
+"""
+    resilience(j::AbstractMatrix)
+
+Compute community resilience from the `j`acobian.
+Resilience corresponds here to the dominant eigenvalues of the Jacobian.
+
+For technical details see [Arnoldi et al. 2019](https://doi.org/10.1016/j.jtbi.2017.10.003)
+
+See also [`jacobian`](@ref).
+"""
+resilience(j::AbstractMatrix) = maximum(real.(eigvals(j)))
+export resilience
+
+"""
+    reactivity(j::AbstractMatrix)
+
+Compute community reactivity from the `j`acobian.
+Reactivity corresponds to the worst initial response of the community to
+a pulse disturbance.
+
+For technical details see [Arnoldi et al. 2019](https://doi.org/10.1016/j.jtbi.2017.10.003)
+
+See also [`jacobian`](@ref).
+"""
+reactivity(j::AbstractMatrix) = maximum(real.(eigvals(j + transpose(j)))) / 2
+export reactivity
