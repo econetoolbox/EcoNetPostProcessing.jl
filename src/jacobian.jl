@@ -1,8 +1,3 @@
-# using ForwardDiff
-using EcologicalNetworksDynamics
-using LinearAlgebra
-import ForwardDiff: jacobian
-
 """
     get_dBdt(m::Model)
 
