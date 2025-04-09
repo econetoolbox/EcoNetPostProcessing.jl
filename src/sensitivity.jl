@@ -42,4 +42,27 @@ the vectory of species biomass `B` should be specified.
 The sensitivity matrix is defined as the inverse of the interaction matrix.
 See [Novak et al. 2016](https://doi.org/10.1146/annurev-ecolsys-032416-010215).
 """
-function sensitivity(m::Model, B::AbstractVector) end
+sensitivity(m::Model, B::AbstractVector) = -inv(get_interaction(m, B))
+export sensitivity
+
+"""
+    keystoneness(m::Model, B::AbstractVector)
+
+Compute species keystoneness from a given model `m`
+at the point given by the vector of species biomass `B`.
+Most of the time `B` should be the vector of species equilibrium biomass.
+Keystoneness of species i is defined as the sum `abs(S[i, j])` for
+j different from i.
+It quantifies how a change in the growth rate of species i
+impacts all other species.
+
+For a formal definition see [Li et al. 2025](https://doi.org/10.1111/ele.70086).
+
+See also [`sensitivity`](@ref).
+"""
+function keystoneness(m::Model, B::AbstractVector)
+    S = sensitivity(m, B)
+    S_nodiag = S - Diagonal(S)
+    vec(sum(abs, S_nodiag; dims = 1))
+end
+export keystoneness

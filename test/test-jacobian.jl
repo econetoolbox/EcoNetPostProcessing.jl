@@ -140,7 +140,7 @@ end
     @test j_interference[2, 3] == j_interference[3, 2] < 0
 end
 
-@testset "Jacobian: nutrients" begin
+@testset "Jacobian: nutrients." begin
     fw = Foodweb([0 0; 0 0])
     nutrients = NutrientIntake(;
         half_saturation = [0.3 0.9; 0.9 0.3],
@@ -155,7 +155,7 @@ end
     @test all(real.(eigvals(j)) .< 1e-3)
 end
 
-@testset "Resilience" begin
+@testset "Resilience." begin
     fw = Foodweb([0 0; 0 0])
     m = default_model(fw)
     j = jacobian(m, m.K)
@@ -164,7 +164,7 @@ end
     @test resilience([-0.2 2; 0 -1]) == -0.2
 end
 
-@testset "Resilience" begin
+@testset "Reactivity." begin
     fw = Foodweb([0 0; 0 0])
     m = default_model(fw)
     j = jacobian(m, m.K)
