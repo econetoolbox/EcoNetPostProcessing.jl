@@ -1,7 +1,7 @@
 @testset "extract model from solution" begin
     foodweb = Foodweb([0 0; 0 0])
     m = default_model(foodweb)
-    sim = simulate(m, [0, 0.5], 10; show_degenerated_biomass_graph_properties = false)
+    sim = simulate(m, [0, 0.5], 10; show_degenerated = false)
     @test typeof(get_model(sim)) == Model
 end
 
@@ -10,7 +10,7 @@ end
     # Set up
     foodweb = Foodweb([0 0; 0 0])
     m = default_model(foodweb)
-    sim = simulate(m, [0, 0.5], 10; show_degenerated_biomass_graph_properties = false)
+    sim = simulate(m, [0, 0.5], 10; show_degenerated = false)
 
     @test round.(extract_last_timesteps(sim; last = "20.5%")) == [0.0 0.0; 1.0 1.0]
 
