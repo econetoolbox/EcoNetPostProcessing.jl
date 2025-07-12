@@ -9,4 +9,5 @@ show_degenerated = false # Silent warnings.
 #include("./test-utils.jl")
 include("./test-jacobian.jl")
 include("./test-sensitivity.jl")
+include("./test-robustness.jl")
 include("./doctests.jl")
