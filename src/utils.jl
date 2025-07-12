@@ -43,7 +43,7 @@ true
 """
 function extract_last_timesteps(solution; idxs = nothing, quiet = false, kwargs...)
     last = process_last_timesteps(solution; quiet, kwargs...)
-    out = solution[:, end-(last-1):end]
+    out = solution[:, (end-(last-1)):end]
 
     # Extract species indices:
     idxs = process_idxs(solution; idxs)

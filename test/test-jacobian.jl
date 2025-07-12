@@ -115,7 +115,7 @@ end
         ClassicResponse(),
         NontrophicLayers(; :refuge => (; intensity = r0, C = 1)),
     )
-    j_refuge = jacobian(m, [1, 1, 1])
+    j_refuge = jacobian(m, [1.0, 1, 1])
     @test j_refuge[1, 2] > 0
     @test j_norefuge[1, 2] == 0
     # Interspecific interference.
@@ -127,7 +127,7 @@ end
         NontrophicLayers(; :interference => (; intensity = i0, C = 1)),
     )
     sol = simulate(m, rand(3), 100_000)
-    j_nointerference = jacobian(m, [1, 1, 1])
+    j_nointerference = jacobian(m, [1.0, 1, 1])
     i0 = 0.1
     m = default_model(
         fw,
@@ -135,7 +135,7 @@ end
         NontrophicLayers(; :interference => (; intensity = i0, C = 1)),
     )
     sol = simulate(m, rand(3), 100_000)
-    j_interference = jacobian(m, [1, 1, 1])
+    j_interference = jacobian(m, [1.0, 1, 1])
     @test j_nointerference[2, 3] == j_nointerference[3, 2] == 0
     @test j_interference[2, 3] == j_interference[3, 2] < 0
 end

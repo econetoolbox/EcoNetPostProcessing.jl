@@ -23,7 +23,7 @@ Compute the jacobian of the system specied by the model `B`.
 The jacobian is evaluated in `B` which gives species biomass.
 """
 function jacobian(m::Model, B::AbstractVector)
-    j = jacobian(get_dBdt(m), B)
+    j = jacobian(get_dBdt(m), convert(Vector{Float64}, B))
     Float64.(j)
 end
 export jacobian

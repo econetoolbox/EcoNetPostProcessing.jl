@@ -2,10 +2,10 @@ using Documenter
 using EcologicalNetworksDynamics
 using EcoNetDynOutputs
 
-makedocs(
+makedocs(;
     sitename = "EcoNetDynOutputs",
     format = Documenter.HTML(),
-    modules = [EcoNetDynOutputs]
+    modules = [EcoNetDynOutputs],
 )
 
 # Documenter can also automatically deploy documentation to gh-pages.
