@@ -15,3 +15,13 @@
     @test secondary_extinctions(m, 2, B0) == [3]
     @test secondary_extinctions(m, 3, B0) == []
 end
+
+@testset "Robustness" begin
+    n = rand(2:10)
+    fw = Foodweb(zeros(Int, n, n))
+    m = default_model(fw)
+    @test robustness(m) == 0
+    fw = Foodweb([2 => 1])
+    m = default_model(fw)
+    @test 0.4 <= robustness(m) <= 0.6
+end

@@ -2,6 +2,8 @@ module EcoNetDynOutputs
 
 using EcologicalNetworksDynamics
 using LinearAlgebra
+using Random
+using Statistics
 import ForwardDiff: jacobian
 
 include("jacobian.jl")
