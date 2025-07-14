@@ -4,6 +4,7 @@ authors = ["Alain Danet <a.h.danet@sheffield.ac.uk>", "Ismaël Lajaaiti <ismael.
 version = "0.1.0"
 
 [deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 EcologicalNetworksDynamics = "2fd9189a-c387-4076-88b7-22b33b5a4388"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
@@ -11,6 +12,8 @@ Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
 [compat]
+Documenter = "1.14.1"
+EcologicalNetworksDynamics = "0.3.0"
 ForwardDiff = "0.10.38"
 LinearAlgebra = "1.11.0"
 Random = "1.11.0"

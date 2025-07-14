@@ -38,7 +38,6 @@ function robustness(m::Model; t_end = 1_000, n_rep = 100, threshold = 1e-6)
     B0 = simulate(m, fill(1, S), t_end; show_degenerated = false).u[end]
     rob_vec = Any[undef for _ in 1:n_rep]
     for k in 1:n_rep
-        @info k
         B0_copy = deepcopy(B0)
         seq = shuffle(1:S)
         nb_ext_list = []

@@ -87,3 +87,46 @@ end
         abs(S[1, 3]) + abs(S[2, 3]),
     ]
 end
+
+@testset "Resistance." begin
+    # Two independent species.
+    fw = Foodweb([0 0; 0 0])
+    m = default_model(fw)
+    Beq = simulate(m, [1, 1], 100; show_degenerated = false).u[end]
+    @test resistance(m, Beq) == [-1, -1]
+    @test resistance(m, Beq; perturbation_on = 1, response_of = 2) == 0
+    @test resistance(m, Beq; perturbation_on = 2, response_of = 1) == 0
+    @test resistance(m, Beq; perturbation_on = 1, response_of = 1) == -1
+    @test resistance(m, Beq; perturbation_on = 2, response_of = 2) == -1
+    @test resistance(m, Beq; aggregated = true) == -2
+    @test resistance(m, Beq; perturbation_on = 1, aggregated = true) == -1
+    @test resistance(m, Beq; response_of = 1, aggregated = true) == -1
+    # Consumer - resource.
+    fw = Foodweb([2 => 1])
+    m = default_model(fw)
+    Beq = simulate(m, [1, 1], 100; show_degenerated = false).u[end]
+    @test isapprox(resistance(m, Beq; perturbation_on = 1, response_of = 1), 0, atol = 1e-6)
+    @test resistance(m, Beq; perturbation_on = 1, response_of = 2) < 0
+    @test resistance(m, Beq; perturbation_on = 2, response_of = 1) > 0
+    # Test keyword arguments.
+    res_exp = resistance(m, Beq)
+    @test resistance(m, Beq; perturbation_on = [1, 2]) == res_exp
+    @test resistance(m, Beq; perturbation_on = [2, 1]) == res_exp
+    @test resistance(m, Beq; response_of = [1, 2]) == res_exp
+    @test resistance(m, Beq; response_of = [2, 1]) == res_exp[[2, 1]]
+end
+
+@testset "Resistance from simulations." begin
+    # Two independent species.
+    fw = Foodweb([0 0; 0 0])
+    m = default_model(fw)
+    Beq = simulate(m, [1, 1], 100; show_degenerated = false).u[end]
+    res = resistance_simulation(m, Beq)
+    @test isapprox(res, [-1, -1]; atol = 1e-6)
+    res = resistance_simulation(m, Beq; mortality_increment = [0.1, 0])
+    @test isapprox(res[1], -1, atol = 1e-2)
+    @test res[2] == :undefined
+    res = resistance_simulation(m, Beq; mortality_increment = [0.1, 0], normalized = false)
+    @test res[2] == 0
+    @test isapprox(resistance_simulation(m, Beq; aggregated = true), -2, atol = 1e-2)
+end
