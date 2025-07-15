@@ -10,20 +10,19 @@ DocMeta.setdocmeta!(
 )
 
 makedocs(;
-    sitename="EcoNetDynOutputs",
-    repo=Remotes.GitHub("econetoolbox", "EcoNetDynOutputs.jl"),
+    pages=["Home" => "index.md", "Functions" => "docstrings.md"],
+    sitename="EcoNetDynOutputs.jl",
+    repo="https://github.com/econetoolbox/EcoNetDynOutputs.jl",
     format=Documenter.HTML(;
-        canonical="https://github.com/econetoolbox/EcoNetDynOutputs.jl",
+        prettyurls=get(ENV, "CI", "false") == "true",
+        assets=String[],
     ),
     modules=[EcoNetDynOutputs],
-    pages=["Home" => "index.md", "Functions" => "docstrings.md"],
 )
 
 deploydocs(;
     repo="github.com/econetoolbox/EcoNetDynOutputs.jl",
-    target="build", # this is where Vitepress stores its output
     devbranch="main",
     branch="gh-pages",
-    push_preview=true,
 )
 
