@@ -1,8 +1,8 @@
 # Stability
 
 This section covers how to analyse the stability of a community once simulated
-with [EcologicalNetworksDynamics](https://econetoolbox.github.io/EcologicalNetworksDynamics.jl/).
-Stability can be notoriously measured in many different ways.
+with [EcologicalNetworksDynamics](https://econetoolbox.github.io/EcologicalNetworksDynamics.jl/) [lajaaiti2025ecologicalnetworksdynamicsjl](@cite).
+Stability can be notoriously measured in many different ways [grimm1997babel](@cite).
 We provide in what follows an overview of the different stability metrics
 available from our package.
 We have aimed to implement the most common and used stability metrics.
@@ -66,7 +66,7 @@ j = jacobian(m, Beq)
 ```
 
 
-Various stability metrics can be derived from the Jacobian.
+Various stability metrics can be derived from the Jacobian [arnoldi2018how](@cite).
 The most common is by far the asymptotic resilience, formally defined as
 
 ```math
@@ -89,7 +89,7 @@ The more negative the resilience, the more stable the community is.
 Another common stability metric derived from the Jacobian, that is
 increasingly used is the community reactivity.
 While the resilience gives the long-term recovery rate of the community,
-the [`reactivity`](@ref) informs on the contrary on the short-term recovery rate.
+the [`reactivity`](@ref) informs on the contrary on the short-term recovery rate [neubert1997alternatives](@cite).
 It is formally defined as
 
 ```math
@@ -115,7 +115,7 @@ The response to this type of disturbances (hereafter 'press') is captured by the
 *sensitivity matrix*.
 Elements of the sensitivity matrix for instance quantifies
 how an increase is species mortality
-affects the biomass of another species.
+affects the biomass of another species [novak2016characterizing](@cite).
 The sensitivity matrix is simply the inverse of the interaction matrix.
 Because in our model interactions are density-dependent,
 the vector of species biomass (where to evaluate interactions)
@@ -211,10 +211,10 @@ should be aggregated (averaged) at the community level.
 
 ## Secondary extinctions and robustness
 
-Another set of stability metrics focus on secondary extinctions (or cascading extinctions).
+Another set of stability metrics focus on secondary extinctions (or cascading extinctions) [keyes2024synthesising](@cite).
 Secondary extinctions measure the number of extinctions
 following the extinction of a first species.
-It informs on the importance, or more specifically the 'keystoness', of that species.
+It informs on the importance, or more specifically the 'keystone-ness' [li2025body](@cite), of that species.
 If the extinction of that species result in many secondary extinctions,
 it means that the species is key for the community (or is a keystone species)
 as its presence allows many other species to coexist.
