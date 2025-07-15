@@ -16,7 +16,7 @@ DocMeta.setdocmeta!(
 )
 
 makedocs(;
-    authors="Alain Danet & Ismaël Lajaaiti",
+    authors="Alain Danet and Ismaël Lajaaiti",
     pages=[
         "Home" => "index.md",
         "Stability" => "stability.md",
