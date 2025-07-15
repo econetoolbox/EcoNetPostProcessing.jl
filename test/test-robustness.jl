@@ -20,8 +20,8 @@ end
     n = rand(2:10)
     fw = Foodweb(zeros(Int, n, n))
     m = default_model(fw)
-    @test robustness(m) == 0
+    @test robustness(m) == Inf
     fw = Foodweb([2 => 1])
     m = default_model(fw)
-    @test 0.4 <= robustness(m) <= 0.6
+    @test 3 >= robustness(m) >= 1
 end

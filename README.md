@@ -3,10 +3,12 @@
 
 TODO
 
-- [] Move documentation
-- [] Resistance
-- [] Robustness
-- [] Doc new feature
-- [] Add mathematical definitions of metrics
+- [] Doc utils
 - [] More in depth examples
-- [] Integrate with GLV
+- [] Refs
+- [] Change package name
+- [x] Doc new feature
+- [x] Add mathematical definitions of metrics
+- [x] Move documentation
+- [x] Resistance
+- [x] Robustness

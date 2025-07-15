@@ -10,7 +10,12 @@ DocMeta.setdocmeta!(
 )
 
 makedocs(;
-    pages=["Home" => "index.md", "Functions" => "docstrings.md"],
+    pages=[
+        "Home" => "index.md",
+        "Stability" => "stability.md",
+        "Utilities" => "utils.md",
+        "Functions" => "docstrings.md"
+    ],
     sitename="EcoNetDynOutputs.jl",
     repo="https://github.com/econetoolbox/EcoNetDynOutputs.jl",
     format=Documenter.HTML(;

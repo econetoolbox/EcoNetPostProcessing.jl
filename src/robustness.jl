@@ -16,7 +16,7 @@ of `extinct_sp` of a model `m` with initial biomasses `B_start`.
   - `t_end` specifies the duration of simulation
   - `threshold` gives the biomass below which a species is considered extinct.
 
-See also .
+See also [`robustness`](@ref).
 """
 function secondary_extinctions(
     m::Model,
@@ -33,6 +33,29 @@ function secondary_extinctions(
 end
 export secondary_extinctions
 
+"""
+    robustness(m::Model; t_end = 1_000, n_rep = 100, threshold = 1e-6)
+
+Compute the community robustness.
+Robustness is defined as the inverse
+of the number of secondary extinctions.
+The number of average number of secondary extinctions
+is averaged over `n_rep` random extinction sequences.
+Each extinction sequences set the order of species extinction, and terminate
+when all species are extinct.
+
+### Main argument
+
+  - `m` specifies the community.
+
+### Keyword arguemnts
+
+  - `t_end` simulation duration (default to 1_000)
+  - `n_rep` number of extinction sequences (default to 100)
+  - `threshold` biomass value under which species are considered extinct (default to 1e-6)
+
+See also [secondary_extinctions](@ref).
+"""
 function robustness(m::Model; t_end = 1_000, n_rep = 100, threshold = 1e-6)
     S = m.richness
     B0 = simulate(m, fill(1, S), t_end; show_degenerated = false).u[end]
@@ -55,7 +78,7 @@ function robustness(m::Model; t_end = 1_000, n_rep = 100, threshold = 1e-6)
         end
         rob_vec[k] = mean(nb_ext_list)
     end
-    mean(rob_vec)
+    1 / mean(rob_vec)
 end
 export robustness
 
