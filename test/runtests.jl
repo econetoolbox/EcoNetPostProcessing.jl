@@ -1,6 +1,5 @@
 using Test
 
-<<<<<<< HEAD
 using EcologicalNetworksDynamics
 using EcoNetDynOutputs
 using LinearAlgebra

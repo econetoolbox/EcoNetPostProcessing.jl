@@ -13,8 +13,7 @@ Returns the biomass matrix of species x time over the `last` timesteps.
   - `idxs`: vector of species indexes or names. Set to `nothing` by default.
   - `quiet`: ignores warning issue while extracting timesteps before last species extinction
 
-See [`richness`](@ref) for the other arguments. If `idxs` is an integer,
-it returns a vector of the species biomass instead of a matrix.
+If `idxs` is an integer, it returns a vector of the species biomass instead of a matrix.
 
 # Examples
 
@@ -62,7 +61,7 @@ export extract_last_timesteps
     process_idxs(solution; idxs = nothing)
 
 Check and sanitize the species indices or names provided (`idxs`). Used in
-[`extract_last_timesteps`](@ref) and [`living_species`](@ref).
+[`extract_last_timesteps`](@ref).
 """
 function process_idxs(solution; idxs = nothing)
     sp = get_model(solution).species.names
