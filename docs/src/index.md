@@ -26,4 +26,4 @@ The package also implements a suite of commonly used ecological stability metric
 
 These metrics can be directly evaluated on dynamical models defined using `EcologicalNetworksDynamics`.
 
-For more information, refer to the [`Stability`](@ref) section.
+For more information, refer to the [Stability](@ref) section.
