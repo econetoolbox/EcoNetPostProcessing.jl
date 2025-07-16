@@ -1,4 +1,4 @@
-module EcoNetDynOutputs
+module EcoNetPostProcessing
 
 using EcologicalNetworksDynamics
 using LinearAlgebra

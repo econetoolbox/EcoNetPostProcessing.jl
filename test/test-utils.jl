@@ -110,7 +110,7 @@ end
 
 @testset "check extinction" begin
 
-    check_last = EcoNetDynOutputs.check_last_extinction
+    check_last = EcoNetPostProcessing.check_last_extinction
     @test check_last(100; t = [100], species = ["s2"], last = 1) == true
 
     @test_warn(

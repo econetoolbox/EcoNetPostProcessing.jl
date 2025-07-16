@@ -1,15 +1,15 @@
 module Doctest
 
 using Documenter
-import EcoNetDynOutputs
+import EcoNetPostProcessing
 
 DocMeta.setdocmeta!(
-    EcoNetDynOutputs,
+    EcoNetPostProcessing,
     :DocTestSetup,
-    :(using EcoNetDynOutputs, EcologicalNetworksDynamics);
+    :(using EcoNetPostProcessing, EcologicalNetworksDynamics);
     recursive = true,
 )
 
-doctest(EcoNetDynOutputs)
+doctest(EcoNetPostProcessing)
 
 end

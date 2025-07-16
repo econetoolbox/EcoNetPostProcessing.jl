@@ -1,7 +1,7 @@
 using Test
 
 using EcologicalNetworksDynamics
-using EcoNetDynOutputs
+using EcoNetPostProcessing
 using LinearAlgebra
 show_degenerated = false # Silent warnings.
 

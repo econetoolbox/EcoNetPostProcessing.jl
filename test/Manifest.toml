@@ -2,7 +2,7 @@
 
 julia_version = "1.11.6"
 manifest_format = "2.0"
-project_hash = "b35ce23c162ea63b8092d949d5c5fe9513c81fec"
+project_hash = "96bb6bba8a7fac9c4f201f3fb8bf8fc74d469f37"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "be7ae030256b8ef14a441726c4c37766b90b93a3"
@@ -531,7 +531,7 @@ deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
 
-[[deps.EcoNetDynOutputs]]
+[[deps.EcoNetPostProcessing]]
 deps = ["Documenter", "EcologicalNetworksDynamics", "ForwardDiff", "LinearAlgebra", "Random", "Statistics"]
 path = ".."
 uuid = "9b7c96af-00f4-4809-8f3b-e928a99f2955"

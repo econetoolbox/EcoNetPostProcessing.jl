@@ -10,7 +10,7 @@ We have aimed to implement the most common and used stability metrics.
 To begin we need to import the companion package.
 
 ```@example econetd
-using EcoNetDynOutputs # Companion package - stability functions.
+using EcoNetPostProcessing # Companion package - stability functions.
 ```
 
 ## Simulating a simple community

@@ -1,17 +1,14 @@
 using Documenter
 using DocumenterCitations
 using EcologicalNetworksDynamics
-using EcoNetDynOutputs
+using EcoNetPostProcessing
 
-bib = CitationBibliography(
-    joinpath(@__DIR__, "src", "refs.bib");
-    style=:authoryear
-)
+bib = CitationBibliography(joinpath(@__DIR__, "src", "refs.bib"); style=:authoryear)
 
 DocMeta.setdocmeta!(
-    EcoNetDynOutputs,
+    EcoNetPostProcessing,
     :DocTestSetup,
-    :(using EcoNetDynOutputs, EcologicalNetworksDynamics);
+    :(using EcoNetPostProcessing, EcologicalNetworksDynamics);
     recursive=true,
 )
 
@@ -24,18 +21,18 @@ makedocs(;
         "Functions" => "docstrings.md",
         "References" => "references.md",
     ],
-    sitename="EcoNetDynOutputs.jl",
-    repo="https://github.com/econetoolbox/EcoNetDynOutputs.jl",
+    sitename="EcoNetPostProcessing.jl",
+    repo="https://github.com/econetoolbox/EcoNetPostProcessing.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
         assets=String[],
     ),
-    modules=[EcoNetDynOutputs],
+    modules=[EcoNetPostProcessing],
     plugins=[bib],
 )
 
 deploydocs(;
-    repo="github.com/econetoolbox/EcoNetDynOutputs.jl",
+    repo="github.com/econetoolbox/EcoNetPostProcessing.jl",
     devbranch="main",
     branch="gh-pages",
 )
